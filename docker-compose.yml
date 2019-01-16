@@ -14,14 +14,12 @@ nginx:
     - datastore
 
 
-# php:7.1-fpm
+# php:5.6.40-fpm-jessie
 php: 
   build: ./php
   # 別コンテナのエイリアスを設定 （リンク）
   links:
     - mariadb
-    - redis
-    - memcached
   # [ホスト]：[コンテナ] ホストのディレクトリ以下をコンテナのパスにマウント
   volumes:
     - ./php/:/var/www/html/
@@ -37,23 +35,6 @@ mariadb:
     - '3306'
   volumes_from:
     - datastore
-
-
-# redis
-redis:
-  image: redis:3.0.7
-  expose:
-    - '6379'
-  volumes_from:
-    - datastore
-
-
-# memcached
-memcached:
-  image: memcached:1.4.32
-  expose:
-    - '11211'
-
 
 # phpmyadmin
 phpmyadmin:
